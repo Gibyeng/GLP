@@ -1,0 +1,8 @@
+graph: /home/changye/Documents/GPULP/datasets/sorted_com-dblp.ungraph.bin method: 9 iteration: 20 time: 0.567721
+graph: /home/changye/Documents/GPULP/datasets/sorted_roadNet-CA.bin method: 9 iteration: 20 time: 0.77265
+graph: /home/changye/Documents/GPULP/datasets/sorted_com-youtube.ungraph.bin method: 9 iteration: 20 time: 1.66571
+graph: /home/changye/Documents/GPULP/datasets/sorted_conv_aligraph.bin method: 9 iteration: 20 time: 2.67996
+graph: /home/changye/Documents/GPULP/datasets/sorted_com-lj.ungraph.bin method: 9 iteration: 20 time: 14.7545
+graph: /home/changye/Documents/GPULP/datasets/sorted_direct_uk-2002.bin method: 9 iteration: 20 time: 97.8147
+graph: /home/changye/Documents/GPULP/datasets/sorted_direct_wikipedia_en.bin method: 9 iteration: 20 time: 360.034
+graph: /home/changye/Documents/GPULP/datasets/sorted_direct2_twitter_rv.bin method: 9 iteration: 20 time: 177.572

@@ -1,0 +1,5 @@
+graph: /home/changye/Documents/GPULP/datasets/sorted_com-dblp.ungraph.bin method: 9 iteration: 20 time: 0.854554
+graph: /home/changye/Documents/GPULP/datasets/sorted_roadNet-CA.bin method: 9 iteration: 20 time: 0.87841
+graph: /home/changye/Documents/GPULP/datasets/sorted_com-youtube.ungraph.bin method: 9 iteration: 20 time: 1.83175
+graph: /home/changye/Documents/GPULP/datasets/sorted_conv_aligraph.bin method: 9 iteration: 20 time: 3.42269
+graph: /home/changye/Documents/GPULP/datasets/sorted_com-lj.ungraph.bin method: 9 iteration: 20 time: 16.289

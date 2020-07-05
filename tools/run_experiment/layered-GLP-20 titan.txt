@@ -1,0 +1,8 @@
+graph: /home/yechang/yechang-workspace/GPULP/datasets/bin/sorted_com-dblp.ungraph.bin method: 11 iteration: 20 time: 0.086167
+graph: /home/yechang/yechang-workspace/GPULP/datasets/bin/sorted_roadNet-CA.bin method: 11 iteration: 20 time: 0.423662
+graph: /home/yechang/yechang-workspace/GPULP/datasets/bin/sorted_com-youtube.ungraph.bin method: 11 iteration: 20 time: 0.239424
+graph: /home/yechang/yechang-workspace/GPULP/datasets/bin/sorted_conv_aligraph.bin method: 11 iteration: 20 time: 0.500853
+graph: /home/yechang/yechang-workspace/GPULP/datasets/bin/sorted_com-lj.ungraph.bin method: 11 iteration: 20 time: 1.21781
+graph: /home/yechang/yechang-workspace/GPULP/datasets/bin/sorted_direct_uk-2002.bin method: 11 iteration: 20 time: 3.61048
+graph: /home/yechang/yechang-workspace/GPULP/datasets/bin/sorted_direct_wikipedia_en.bin method: 11 iteration: 20 time: 7.12643
+graph: /home/yechang/yechang-workspace/GPULP/datasets/bin/sorted_direct2_twitter_rv.bin method: 11 iteration: 20 time: 14.7624
