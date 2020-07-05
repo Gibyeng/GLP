@@ -42,11 +42,11 @@ Input Format for GLP
 --------
 
 AdjacencyGraph
-0 1
-0 2
-1 3
-4 5
-6 7
+0 1  
+0 2  
+1 3  
+4 5  
+6 7  
 
 GLP support adacency graph of input. 
 Each line represents one edge of the graph.
