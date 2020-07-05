@@ -41,7 +41,7 @@ $ ./GPULP 3 20 ./datasets/text.bin output.bin 0
 Input Format for GLP
 --------
 
-AdjacencyGraph
+AdjacencyGraph  
 0 1  
 0 2  
 1 3  
