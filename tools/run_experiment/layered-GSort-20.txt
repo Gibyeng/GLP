@@ -1,8 +1,0 @@
-graph: com-dblp.ungraph.bin iteration: 20 time: 0.174417
-graph: sorted_roadNet-CA.bin iteration: 20 time: 0.775302
-graph: sorted_com-youtube.ungraph.bin iteration: 20 time: 0.386309
-graph: sorted_conv_aligraph.bin iteration: 20 time: 2.56725
-graph: sorted_com-lj.ungraph.bin iteration: 20 time: 3.50861
-graph: sorted_direct_uk-2002.bin iteration: 20 time: 8.65817
-graph: sorted_direct_wikipedia_en.bin iteration: 20 time: 19.9027
-graph: sorted_direct2_twitter_rv.bin iteration: 20 time: 117.835
