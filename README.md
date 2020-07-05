@@ -14,7 +14,7 @@ Requirements
 * CUDA environment
 * OpenMP
 
-Compilation is done within the / directory with CMake. 
+Compilation is done within the Root/ directory with CMake. 
 Please make sure you have install CMake software compilation tool.
 Configure cmakelist.txt appropriately before you start compile. 
 To compile, simple rum
@@ -26,7 +26,7 @@ $ make .
 
 Running code in GLP
 --------
-Running code is also done within the / directory. 
+Running code is also done within the Root/ directory. 
 Use ".GPULP/ method iterations inputGraphPath outputPath ifDirectGraph" to run a label progagation for an input graph.
 if "method" is set to 1, a classic label propagation will be applied to the input file. 
 For layered Lp and SLPA, just set "method" to 2 and 3 respectively. If you want to implement your own version of LP.
