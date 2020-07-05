@@ -1,0 +1,1 @@
+/usr/bin/c++  -std=c++11 -O3  -rdynamic CMakeFiles/GPULP.dir/GPULP_generated_main.cu.o  -o GPULP /usr/local/cuda/lib64/libcudart_static.a -lpthread -ldl -lrt libkernel.a /usr/local/cuda/lib64/libcudadevrt.a /usr/local/cuda/lib64/libcudart_static.a -lpthread -ldl -lrt -lgomp -lpthread 
