@@ -3,89 +3,24 @@
 
 #include <cuda_profiler_api.h>
 
-#include "myutil.h"
-#include "graph.h"
+#include "header/myutil.h"
+#include "header/graph.h"
+#include "header/test_result.h"
 
-#include "prop/Lprop.cuh"
-#include "prop/CMLprop.cuh"
-#include "prop/MultiLprop.cuh"
-#include "prop/BasicLprop.cuh"
-#include "prop/Base1prop.cuh"
-#include "prop/Base2prop.cuh"
-#include "prop/Base3prop.cuh"
-#include "prop/PushLprop.cuh"
-#include "prop/MultiGprop.cuh"
-#include "prop/MBase1prop.cuh"
-#include "prop/MBase2prop.cuh"
-#include "prop/CPUlp.cuh"
-#include "prop/seedLprop.cuh"
 #include "prop/layeredLprop.cuh"
-#include "prop/Base4prop.cuh"
 #include "prop/SLPAprop.cuh"
 #include "prop/Base5prop.cuh"
-#include "test_result.h"
+
 #include "prop/Test1prop.cuh"
 #include "prop/Test2prop.cuh"
 #include "prop/Test3prop.cuh"
 
 int main(int argc, char *argv[])
  {
-//	// start with 1
-//    std::string graphpath0 {"/home/changye/Documents/GPULP/datasets/sorted_direct_test.bin"};
-////    std::string graphpath0 {"/home/changye/Documents/GPULP/datasets/test.bin"};
-//    std::string graphpath1 {"/home/changye/Documents/GPULP/datasets/com-amazon.ungraph.bin"};
-//    std::string graphpath2 {"/home/changye/Documents/GPULP/datasets/com-dblp.ungraph.bin"};
-//   // std::string graphpath20 {"/home/changye/Documents/GPULP/datasets/normalized_com-amazon.ungraph.txt"};
-//    std::string graphpath3 {"/home/changye/Documents/GPULP/datasets/com-youtube.ungraph.bin"};
-//    //std::string graphpath4 {"/home/changye/Documents/GPULP/datasets/com-friendster.ungraph.bin"};
-//    // start with 0
-//    std::string graphpath4 {"/home/changye/Documents/GPULP/datasets/roadNet-CA.bin"};
-//    std::string graphpath5 {"/home/changye/Documents/GPULP/datasets/com-lj.ungraph.bin"};
-//    std::string graphpath6 {"/home/changye/Documents/GPULP/datasets/com-orkut.ungraph.bin"};
-//    std::string graphpath7 {"/home/changye/Documents/GPULP/datasets/wiki-en.bin"};
-//    std::string graphpath8 {"/home/changye/Documents/GPULP/datasets/com-friendster.ungraph.txt.bin"};
-//    std::string graphpath9 {"/home/changye/Documents/GPULP/datasets/uk-2002.bin"};
 
     //sorted graph using in method 15
-    std::string graphpath10 {"/home/changye/Documents/GPULP/datasets/sorted_com-youtube.ungraph.bin"};
-    std::string graphpath11 {"/home/changye/Documents/GPULP/datasets/sorted_com-lj.ungraph.bin"};
-    std::string graphpath12 {"/home/changye/Documents/GPULP/datasets/sorted_com-dblp.ungraph.bin"};
-    std::string graphpath13 {"/home/changye/Documents/GPULP/datasets/sorted_com-orkut.ungraph.bin"};
-    std::string graphpath14 {"/home/changye/Documents/GPULP/datasets/sorted_direct_wikipedia_en.bin"};
-    std::string graphpath15 {"/home/changye/Documents/GPULP/datasets/sorted_direct_uk-2002.bin"};
-    std::string graphpath16 {"/home/changye/Documents/GPULP/datasets/sorted_direct2_twitter_rv.bin"};
-    std::string graphpath18 {"/home/changye/Documents/GPULP/datasets/sorted_roadNet-CA.bin"};
-    std::string graphpath17 {"/home/changye/Documents/GPULP/datasets/sorted_conv_aligraph.bin"};
+    std::string graphpath {"./datasets/xxx.bin"};
 
-    //man made database
-    std::string graphpath19{"/home/changye/Documents/GPULP/datasets/sorted_graph500_19_4.bin"};
-	std::string graphpath20{"/home/changye/Documents/GPULP/datasets/sorted_graph500_20_4.bin"};
-	std::string graphpath21{"/home/changye/Documents/GPULP/datasets/sorted_graph500_21_4.bin"};
-	std::string graphpath22{"/home/changye/Documents/GPULP/datasets/sorted_graph500_22_4.bin"};
-	std::string graphpath23{"/home/changye/Documents/GPULP/datasets/sorted_graph500_23_4.bin"};
-
-    std::string graphpath29{"/home/changye/Documents/GPULP/datasets/sorted_graph500_19_8.bin"};
-    std::string graphpath30{"/home/changye/Documents/GPULP/datasets/sorted_graph500_20_8.bin"};
-    std::string graphpath31{"/home/changye/Documents/GPULP/datasets/sorted_graph500_21_8.bin"};
-    std::string graphpath32{"/home/changye/Documents/GPULP/datasets/sorted_graph500_22_8.bin"};
-    std::string graphpath33{"/home/changye/Documents/GPULP/datasets/sorted_graph500_23_8.bin"};
-    std::string graphpath34{"/home/changye/Documents/GPULP/datasets/sorted_graph500_24_8.bin"};
-    std::string graphpath35{"/home/changye/Documents/GPULP/datasets/sorted_graph500_25_8.bin"};
-
-    std::string graphpath39{"/home/changye/Documents/GPULP/datasets/sorted_graph500_19_16.bin"};
-	std::string graphpath40{"/home/changye/Documents/GPULP/datasets/sorted_graph500_20_16.bin"};
-	std::string graphpath41{"/home/changye/Documents/GPULP/datasets/sorted_graph500_21_16.bin"};
-	std::string graphpath42{"/home/changye/Documents/GPULP/datasets/sorted_graph500_22_16.bin"};
-	std::string graphpath43{"/home/changye/Documents/GPULP/datasets/sorted_graph500_23_16.bin"};
-    std::string graphpath44{"/home/changye/Documents/GPULP/datasets/sorted_graph500_24_16.bin"};
-	std::string graphpath45{"/home/changye/Documents/GPULP/datasets/sorted_graph500_25_16.bin"};
-
-	std::string graphpath46{"/home/changye/Documents/GPULP/datasets/sorted_graph500_23_12.bin"};
-	std::string graphpath47{"/home/changye/Documents/GPULP/datasets/sorted_graph500_23_20.bin"};
-	std::string graphpath48{"/home/changye/Documents/GPULP/datasets/sorted_graph500_23_24.bin"};
-
-	std::string graphpath50{"/home/changye/Documents/GPULP/datasets/D/sorted_D2_part1.bin"};
-	std::string graphpath51{"/home/changye/Documents/GPULP/datasets/D/D7_part1.bin"};
 	using Vertex = int32_t;
     using Edge = int32_t;
 
@@ -105,7 +40,7 @@ int main(int argc, char *argv[])
 		niter = 20;
 		// graph, startvalue, if_direct
 		// true - direct (14,15,16), false undirect(10-13,17,18)
-		graph = new CSRGraph<Vertex, Edge>(graphpath10,0,false);
+		graph = new CSRGraph<Vertex, Edge>(graphpath,0,false);
 	}else{
 		if(argc == 6){
 			method = atoi(argv[1]);
@@ -127,181 +62,41 @@ int main(int argc, char *argv[])
 	Test_result* myresult = NULL;
     switch (method){
 
-        case 1:// label propagation final
-        {
-        	auto propagator = new Lprop<Vertex,Edge>(graph);
-        	running_time = propagator->run(niter);
-
-			delete (propagator);
-			break;
-        }
-        case 2:// warp + block (two kernel) baseline 1
+		case 1: //classic LP
 		{
-			auto propagator = new Base1prop<Vertex,Edge>(graph);
-			propagator->run(niter);
-
+			auto propagator = new Test2prop<Vertex,Edge>(graph);
+			myresult = propagator->run(niter);
 			delete (propagator);
 			break;
 		}
-        case 3:// warp + block + shared memory baseline 2
-        {
-        	auto propagator = new Base2prop<Vertex,Edge>(graph);
-			propagator->run(niter);
+		
 
-			delete (propagator);
-			break;
-        }
-
-        case 4://block baseline 3 -- hash table (Ghash)
-	   {
-			auto propagator = new Base3prop<Vertex,Edge>(graph);
-			propagator->run(niter);
-
-			delete (propagator);
-			break;
-	   }
-        case 5: // push-base method update
-        {
-			auto propagator = new PushLprop<Vertex,Edge>(graph);
-			propagator->run(niter);
-
-			delete (propagator);
-			break;
-	    }
-        case 6: // multiGPU
+		case 2:// layered LP  no optimization on loading neighbor label.
 		{
-			auto propagator = new MultiGprop<Vertex,Edge>(graph);
+			auto propagator = new MultiLprop<Vertex,Edge>(graph);
 			running_time = propagator->run(niter);
 
 			delete (propagator);
 			break;
 		}
 
-        case 7:// warp + block (two kernel) baseline 1 multiGPU
+		case 3:// SLPA
 		{
-			auto propagator = new MBase1prop<Vertex,Edge>(graph);
+			auto propagator = new SLPAprop<Vertex,Edge>(graph);
+			running_time = propagator->run(niter);
+
+			delete (propagator);
+			break;
+		}
+		// seed label prop	
+		case 4:{
+			auto propagator = new seedLprop<Vertex,Edge>(graph);
 			propagator->run(niter);
 
 			delete (propagator);
 			break;
 		}
 
-	case 8:// warp + block + shared memory baseline 2 multiGPU
-	{
-		auto propagator = new MBase2prop<Vertex,Edge>(graph);
-		propagator->run(niter);
-
-		delete (propagator);
-		break;
-	}
-
-	case 9:{
-		auto propagator = new CPUlp<Vertex,Edge>(graph);
-//		running_time = propagator->sync_run_1(niter);
-//		running_time = propagator->layered_run(niter);
-		running_time = propagator->slpa_run(niter);
-		delete (propagator);
-		break;
-	}
-
-	// seed label prop	
-	case 10:{
-		auto propagator = new seedLprop<Vertex,Edge>(graph);
-		propagator->run(niter);
-
-		delete (propagator);
-		break;
-	}
-
-
-	case 11:// layered LP  no optimization on loading neighbor label.
-	{
-		auto propagator = new MultiLprop<Vertex,Edge>(graph);
-		running_time = propagator->run(niter);
-
-		delete (propagator);
-		break;
-	}
-	case 12:// layered LP GPU hashtable
-	{
-		auto propagator = new Base4prop<Vertex,Edge>(graph);
-		running_time = propagator->run(niter);
-
-		delete (propagator);
-		break;
-	}
-	case 13:// SLPA
-	{
-		auto propagator = new SLPAprop<Vertex,Edge>(graph);
-		running_time = propagator->run(niter);
-
-		delete (propagator);
-		break;
-	}
-	case 14:// SLPA hash_table
-	{
-		auto propagator = new Base5prop<Vertex,Edge>(graph);
-		running_time = propagator->run(niter);
-
-		delete (propagator);
-		break;
-	}
-
-	case 15: // performance test ~ Lprop- notuse
-	{
-		auto propagator = new Test1prop<Vertex,Edge>(graph);
-		myresult = propagator->run(niter);
-		delete (propagator);
-		break;
-	}
-	case 16: // performance test ~ Lprop without label loading opt
-	{
-		auto propagator = new Test2prop<Vertex,Edge>(graph);
-		myresult = propagator->run(niter);
-		delete (propagator);
-		break;
-	}
-
-	case 17: // performance test ~ Lprop without label loading opt
-	{
-		auto propagator = new Test3prop<Vertex,Edge>(graph);
-		myresult = propagator->run(niter);
-		delete (propagator);
-		break;
-	}
-//        case 3: // layered LP: apply optimization 1
-//        {
-//        	auto propagator = new MultiOptLprop<Vertex,Edge>(graph);
-//			propagator->run(niter);
-//			delete (propagator);
-//			break;
-//        }
-
-//        case 4:// cm-based
-//	   {
-//			auto propagator = new CMLprop<Vertex,Edge>(graph);
-//			propagator->run(niter);
-//
-//			delete (propagator);
-//			break;
-//	   }
-
-//		case 5:// hash base line
-//	   {
-//			auto propagator = new BasicLprop<Vertex,Edge>(graph);
-//			propagator->run(niter);
-//
-//			delete (propagator);
-//			break;
-//	   }
-//		case 6: // experiment test
-//		{
-//			auto propagator = new MultiOptLprop<Vertex,Edge>(graph);
-//			//(int niter,bool opt_load,bool onestep,int changeiter,int delta,int alpha,std::string filename)
-//			propagator->experiment(199,true,true,10,1000,10,std::string{"1.csv"});
-//			delete (propagator);
-//			break;
-//		}
 
     }
 

@@ -15,9 +15,9 @@ Requirements
 * OpenMP
 
 Compilation is done within the Root/ directory with CMake. 
-Please make sure you have install CMake software compilation tool.
+Please make sure you have installed CMake software compilation tool.
 Configure cmakelist.txt appropriately before you start compile. 
-To compile, simple rum
+To compile, simple run:
 
 ```
 $ cmake .
@@ -35,8 +35,8 @@ Please overwrite APIs provide by us.
 Examples
 ```
 $ ./GPULP 1 20 ./datasets/text.bin output.bin 0
-$ ./GPULP 2 20 ./datasets/text.bin output.bin 0
-$ ./GPULP 3 20 ./datasets/text.bin output.bin 0
+or
+$ ./GPULP method=1 iter=20 ./datasets/text.bin output.bin ifdirect=0
 ```
 Input Format for GLP
 --------
@@ -48,11 +48,11 @@ AdjacencyGraph
 4 5  
 6 7  
 
-GLP support adacency graph of input. 
+GLP support adjacency graph of input. 
 Each line represents one edge of the graph.
 Note that input file should be in binary format.
 Before you run LP algorithm, 
-you can easily convert the input graph in "txt" format to "bin" format using "edgelist2bin" and "normalize" programs in the tools directory.
+you can easily convert the input graph in "txt" format to "bin" format using "edgelist2bin" and "normalize" programs in the tools/ directory.
 
 ```
 $ edgelist2bin test.txt
@@ -67,3 +67,28 @@ User-defined APIs
 **UpdateVertex(VertexId vid, LabelT l, double score)**: Given a vertex $vid$, update the status of vertex $vid$ with label $l$ and $score$.  
 
 you can overwrite those APIs, then run a customized LP after setting "method" to 4.
+
+Example of classic LP
+```c++
+__device__ void PickLabel(VertexIdvid){
+    /*copy Lnextto L */
+    G-> Attr-> L[vid] = G-> Attr-> Lnext[vid];
+}
+
+__device__ pair<LabelT, double> LoadNeighbor(VertexIdvid, VertexIdsid){
+    LabelTl = G-> Attr-> L[sid];
+    /*accumulates frequency of l by one */
+    return pair<double,LabelT>(l, 1.0);
+}
+
+__device__ double LabelScore(VertexIdvid, LabelTl, double freq){
+    /*return freqas its label score*/
+    return freq;
+}
+
+__device__ void UpdateVertex(VertexIdvid, LabelTl, double freq){
+    return;
+}
+```
+
+You can find more implements of various LP in the tutorial/ directory.
