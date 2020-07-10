@@ -1,8 +1,8 @@
 # GLP
 A light GPU system for variants of label propagation
+
 Organization
 --------
-
 Code for "Graph Label Propagation on GPUs"
 
 Compilation
