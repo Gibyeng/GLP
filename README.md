@@ -66,7 +66,7 @@ User-defined APIs
 **LabelScore(VertexId vid, LabelT l, double freq)**:Given a vertex $vid$, a label $l$ and  $l$'s frequency among $vid$'s neighbors, it returns a score of $l$ for $vid$.  
 **UpdateVertex(VertexId vid, LabelT l, double score)**: Given a vertex $vid$, update the status of vertex $vid$ with label $l$ and $score$.  
 
-you can overwrite those APIs, then run a customized LP after setting "method" to 4.
+you can overwrite those APIs in file Root/header/kernel.cuh, then run a customized LP after setting "method" to 4.
 
 Example of classic LP
 ```c++

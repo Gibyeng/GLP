@@ -1,6 +1,7 @@
 // -*- coding: utf-8 -*-
 
 #pragma once
+#include <utility>
 #include <stdio.h>
 #include "common/range.cuh"
 #include "method/countmin.cuh"
@@ -6064,4 +6065,22 @@ __global__ void picklabel (int *temp_labels,int* d_label_container, int n,int la
 	if(v < n ){
 		temp_labels[v] = d_label_container[v*label_size];
 	}
+}
+
+
+/*user-defined area*/
+__global__ void picklabel (int vid){
+/*write here*/
+}
+
+__global__ void LoadNeighbor (int vid, int sid){
+/*write here*/
+}
+
+__global__ void LabelScore (int vid, int sid, double freq){
+/*write here*/
+}
+
+__global__ void UpdateVertex ((int vid, int sid, double freq){
+/*write here*/
 }

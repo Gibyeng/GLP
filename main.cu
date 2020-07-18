@@ -12,14 +12,14 @@
 #include "prop/Base5prop.cuh"
 
 #include "prop/Test1prop.cuh"
-#include "prop/Test2prop.cuh"
+#include "prop/classicLprop.cuh"
 #include "prop/Test3prop.cuh"
 
 int main(int argc, char *argv[])
  {
 
     //sorted graph using in method 15
-    std::string graphpath {"./datasets/xxx.bin"};
+    std::string graphpath {"./datasets/test.bin"};
 
 	using Vertex = int32_t;
     using Edge = int32_t;
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 
 		case 1: //classic LP
 		{
-			auto propagator = new Test2prop<Vertex,Edge>(graph);
+			auto propagator = new classicLprop<Vertex,Edge>(graph);
 			myresult = propagator->run(niter);
 			delete (propagator);
 			break;
@@ -88,9 +88,9 @@ int main(int argc, char *argv[])
 			delete (propagator);
 			break;
 		}
-		// seed label prop	
+		// user-defined lp
 		case 4:{
-			auto propagator = new seedLprop<Vertex,Edge>(graph);
+			auto propagator = new UserdefinedLprop<Vertex,Edge>(graph);
 			propagator->run(niter);
 
 			delete (propagator);
