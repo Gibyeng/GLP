@@ -41,13 +41,13 @@ $ ./GPULP method=1 iter=20 input=./datasets/text.bin output=output.bin ifdirect=
 Input Format for GLP
 --------
 
-AdjacencyGraph(unweighted)
+AdjacencyGraph(unweighted)  
 0 1  
 0 2  
 1 3  
 4 5  
 6 7  
-AdjacencyGraph(weighted)
+AdjacencyGraph(weighted)  
 v 0 1  
 v 1 2  
 v 2 3  
