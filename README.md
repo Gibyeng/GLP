@@ -27,29 +27,36 @@ $ make .
 Running code in GLP
 --------
 Running code is also done within the Root/ directory. 
-Use ".GPULP/ method iterations inputGraphPath outputPath ifDirectGraph" to run a label progagation for an input graph.
+Use ".GPULP/ method iterations inputGraphPath outputPath ifDirectedGraph ifWeightedGraph" to run a label progagation for an input graph.
 if "method" is set to 1, a classic label propagation will be applied to the input file. 
 For layered Lp and SLPA, just set "method" to 2 and 3 respectively. If you want to implement your own version of LP.
 Please overwrite APIs provide by us.
 
 Examples
 ```
-$ ./GPULP 1 20 ./datasets/text.bin output.bin 0
+$ ./GPULP 1 20 ./datasets/text.bin output.bin 0 0
 or
-$ ./GPULP method=1 iter=20 ./datasets/text.bin output.bin ifdirect=0
+$ ./GPULP method=1 iter=20 input=./datasets/text.bin output=output.bin ifdirect=0 ifweighted=0
 ```
 Input Format for GLP
 --------
 
-AdjacencyGraph  
+AdjacencyGraph(unweighted)
 0 1  
 0 2  
 1 3  
 4 5  
 6 7  
+AdjacencyGraph(weighted)
+v 0 1  
+v 1 2  
+v 2 3  
+e 0 1 1  
+e 1 2 1  
 
-GLP support adjacency graph of input. 
-Each line represents one edge of the graph.
+GLP support adjacency graph of input. For unweighted graph,
+each line represents one edge of the graph.
+For weighted graph, we use "v vertexid vertexLabel" and "e vertexid vertexid edgeLabel" format.
 Note that input file should be in binary format.
 Before you run LP algorithm, 
 you can easily convert the input graph in "txt" format to "bin" format using "edgelist2bin" and "normalize" programs in the tools/ directory.

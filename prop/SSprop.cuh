@@ -5,7 +5,7 @@
 #include "../graph.h"
 #include "../method/hashtable.cuh"
 #include "../method/countmin.cuh"
-#include "../kernel.cuh"
+#include "../header/kernel.cuh"
 
 template<typename V, typename E>
 class SSprop {

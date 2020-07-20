@@ -4,7 +4,7 @@
 #include "../graph.h"
 #include "../method/hashtable.cuh"
 #include "../method/countmin.cuh"
-#include "../kernel.cuh"
+#include "../header/kernel.cuh"
 #include <thrust/sort.h>
 #include <thrust/execution_policy.h>
 template<typename V, typename E>
