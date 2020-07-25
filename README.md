@@ -7,7 +7,7 @@ Code for "Graph Label Propagation on GPUs"
 
 Download
 --------
-There is a public tool to download the code from anonymous4open. (https://github.com/ShoufaChen/clone-anonymous4open)
+There is a public tool to download the code from anonymous4open. (https://github.com/ShoufaChen/clone-anonymous4open) Note that the tool is just an open source repository in github and we have no relationship with its author.
 
 Compilation
 --------
