@@ -5,6 +5,10 @@ Organization
 --------
 Code for "Graph Label Propagation on GPUs"
 
+Download
+--------
+There is a public tool to download the code from anonymous4open. (https://github.com/ShoufaChen/clone-anonymous4open)
+
 Compilation
 --------
 
@@ -65,7 +69,6 @@ you can easily convert the input graph in "txt" format to "bin" format using "ed
 $ edgelist2bin test.txt
 $ normalize test.bin
 ```
-
 User-defined APIs
 --------
 **PickLabel(VertexId vid)**:Given a vertex vid, it decides vid’s label and write the label to the current label array L.  
