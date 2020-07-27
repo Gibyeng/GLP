@@ -18,7 +18,7 @@ public:
     void errorCheck(std::string message);
     void experiment(const int niter,const bool opt_load, const bool onestep, const bool if_inverse, std::string filename);
     int binary_search(E left,E right,std::vector<V>  offsets,std::vector<V> vertices,V target);
-
+	void Labelpropragation(int num_huge, int num_big, int num_medium, int num_small, int num_tiny, int nt_huge, int nt_big,int nt_medium,int nt_small, int nt_tiny, int nb_huge, int nb_big, int nb_medium1, int nb_small, int nb_tiny2, int huge_index, int big_index, int medium_index,int small_index, int medium, int d_warp_begin, int warpnumber
     GraphT* G;
 protected:
     void preprocess(Test_result* result);
@@ -27,6 +27,7 @@ protected:
     void init_gmem(V n,E m);
 	void free_gmem();
 	void LoadNeighbor();
+	void Labelpropragation()
     // Attributes
 	V* labels;
 	V* d_labels_write;
@@ -342,11 +343,6 @@ double UserdefinedLprop<V, E>::perform_lp(V n,E m,int niter, Test_result* result
     //the other iteration
     for(int j = 1;j<niter;++j){
     	errorCheck("start of new iteration!");
-    	Timer huge_per_iter;
-    	Timer big_per_iter;
-    	Timer medium_per_iter;
-    	Timer small_per_iter;
-    	Timer tiny_per_iter;
     	t2.start();
     	t5.start();
 		// label sync
@@ -366,47 +362,8 @@ double UserdefinedLprop<V, E>::perform_lp(V n,E m,int niter, Test_result* result
     
 
 		cudaDeviceSynchronize();
-		huge_per_iter.start();
-		if(num_huge>0){
-			 l_huge_update_syn2_labelload<32,nt_huge><<<nb_huge, nt_huge, 0,0>>>( d_neighbors,d_offsets, d_labels,d_vertices,d_block_v,d_block_id,d_max_count_huge,d_tables);
-			 l_sub_huge_update_syn<32,nthreads><<<divup(num_huge,nthreads),nthreads,0,0>>>(d_max_count_huge , d_labels_write ,d_counter, huge_index);
-		}
-		cudaDeviceSynchronize();
-		huge_per_iter.stop();
-		result->huge_node_process += huge_per_iter.elapsed_time();
-		big_per_iter.start();
-		if(num_big>0){
-			l_big_update_syn2_labelload<32,VT, nt_big,buffer><<<(num_big+VT-1)/VT, nt_big, 0,0>>>(huge_index,big_index,d_neighbors, d_offsets,d_labels_write,d_labels,d_vertices, d_counter, d_tables);
-		}
-		cudaDeviceSynchronize();
-		big_per_iter.stop();
-		result->big_node_process += big_per_iter.elapsed_time();
-		medium_per_iter.start();
-
-		if(num_medium>0){
-			l_medium_update_syn_labelload<32,VT,nt_medium,layer><<<nb_medium1, nt_medium,0, 0>>>(big_index,medium_index,d_neighbors, d_offsets,d_labels_write,d_labels,d_vertices, d_counter,medium);
-		}
-		cudaDeviceSynchronize();
-		medium_per_iter.stop();
-		result->medium_node_process += medium_per_iter.elapsed_time();
-		small_per_iter.start();
-		if(num_small>0){
-			l_small_update_syn_labelload<32,VT,nt_small><<<nb_small, nt_small,0, 0>>>(medium_index,small_index,d_neighbors, d_offsets,d_labels_write,d_labels,d_vertices, d_counter);
-		}
-		cudaDeviceSynchronize();
-			small_per_iter.stop();
-		result->small_node_process += small_per_iter.elapsed_time();
-		tiny_per_iter.start();
-		if(num_tiny>0){
-			l_tiny_update_syn2_labelload<<<nb_tiny2, nt_tiny,0, 0>>>(d_neighbors, d_offsets,d_labels_write,d_labels, d_counter,d_warp_v,d_warp_begin,warpnumber);
-		}
-		cudaDeviceSynchronize();
-		tiny_per_iter.stop();
-		result->tiny_node_process += tiny_per_iter.elapsed_time();
-    
-
-
-    	cudaDeviceSynchronize();
+		Labelpropragation( num_huge,  num_big,  num_medium,  num_small,  num_tiny,  nt_huge, in nt_big, nt_medium, nt_small,  nt_tiny,  nb_huge,  nb_big,  nb_medium1,  nb_small,  nb_tiny2,  huge_index,  big_index,  medium_index, small_index,  medium,  d_warp_begin,  warpnumber)
+	
     	t3.stop();
     	t2.stop();
     	//printf function
@@ -445,4 +402,31 @@ Test_result* UserdefinedLprop<V, E>::run(int niter)
 template<typename V, typename E>
 Test_result* UserdefinedLprop<V, E>::LoadNeighbor(){
 	cudaMemcpy(d_labels,d_labels_write, sizeof(V) * (G->n) , cudaMemcpyDeviceToDevice);
+}
+
+template <typename V, typename E>
+void UserdefinedLprop<V,E>::Labelpropragation(int num_huge, int num_big, int num_medium, int num_small, int num_tiny, int nt_huge, int nt_big,int nt_medium,int nt_small, int nt_tiny, int nb_huge, int nb_big, int nb_medium1, int nb_small, int nb_tiny2, int huge_index, int big_index, int medium_index,int small_index, int medium, int d_warp_begin, int warpnumber){
+
+	if(num_huge>0){
+		l_huge_update_syn2_labelload<32,nt_huge><<<nb_huge, nt_huge, 0,0>>>( d_neighbors,d_offsets, d_labels,d_vertices,d_block_v,d_block_id,d_max_count_huge,d_tables);
+		l_sub_huge_update_syn<32,nthreads><<<divup(num_huge,nthreads),nthreads,0,0>>>(d_max_count_huge , d_labels_write ,d_counter, huge_index);
+   }
+
+   if(num_big>0){
+	   l_big_update_syn2_labelload<32,VT, nt_big,buffer><<<(num_big+VT-1)/VT, nt_big, 0,0>>>(huge_index,big_index,d_neighbors, d_offsets,d_labels_write,d_labels,d_vertices, d_counter, d_tables);
+   }
+
+
+   if(num_medium>0){
+	   l_medium_update_syn_labelload<32,VT,nt_medium,layer><<<nb_medium1, nt_medium,0, 0>>>(big_index,medium_index,d_neighbors, d_offsets,d_labels_write,d_labels,d_vertices, d_counter,medium);
+   }
+
+
+   if(num_small>0){
+	   l_small_update_syn_labelload<32,VT,nt_small><<<nb_small, nt_small,0, 0>>>(medium_index,small_index,d_neighbors, d_offsets,d_labels_write,d_labels,d_vertices, d_counter);
+   }
+
+   if(num_tiny>0){
+	   l_tiny_update_syn2_labelload<<<nb_tiny2, nt_tiny,0, 0>>>(d_neighbors, d_offsets,d_labels_write,d_labels, d_counter,d_warp_v,d_warp_begin,warpnumber);
+   }
 }
