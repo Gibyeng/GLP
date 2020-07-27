@@ -362,7 +362,7 @@ double UserdefinedLprop<V, E>::perform_lp(V n,E m,int niter, Test_result* result
     
 
 		cudaDeviceSynchronize();
-		Labelpropragation( num_huge,  num_big,  num_medium,  num_small,  num_tiny,  nt_huge, in nt_big, nt_medium, nt_small,  nt_tiny,  nb_huge,  nb_big,  nb_medium1,  nb_small,  nb_tiny2,  huge_index,  big_index,  medium_index, small_index,  medium,  d_warp_begin,  warpnumber)
+		Labelpropragation( num_huge,  num_big,  num_medium,  num_small,  num_tiny,  nt_huge, in nt_big, nt_medium, nt_small,  nt_tiny,  nb_huge,  nb_big,  nb_medium1,  nb_small,  nb_tiny2,  huge_index,  big_index,  medium_index, small_index,  medium,  d_warp_begin,  warpnumber);
 	
     	t3.stop();
     	t2.stop();
