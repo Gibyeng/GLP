@@ -335,7 +335,7 @@ double UserdefinedLprop<V, E>::perform_lp(V n,E m,int niter, Test_result* result
     // the first iteration
     Timer t7;
     t7.start();
-//    first_iteration<<<n_blocks, nthreads, 0, 0>>>(d_neighbors,d_offsets,d_labels, n);
+    first_iteration<<<n_blocks, nthreads, 0, 0>>>(d_neighbors,d_offsets,d_labels, n);
     cudaDeviceSynchronize();
     t7.stop();
     errorCheck("start of iteration!");
